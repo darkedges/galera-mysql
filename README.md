@@ -77,7 +77,7 @@ quorum in the process of applying the new configuration.
 
   ``` sql
   use test;
-  INSERT INTO loltest () VALUES (1);
+  INSERT INTO loltest () VALUES (2);
   select * from loltest;
   ```
 

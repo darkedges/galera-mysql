@@ -1,7 +1,7 @@
 ---
-- name: Add galera configuration
-  template: src=server.cnf.j2 
-            dest=/etc/my.cnf.d/server.cnf
+- name: Add Galera configuration
+  template: src=etc/my.cnf.j2 
+            dest=/etc/my.cnf
             owner=root 
             group=root 
             mode=0644

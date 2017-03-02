@@ -6,7 +6,9 @@
   when: inventory_hostname == groups['galera_cluster'][0]
 
 - name: Bootstrap first MariaDB Galera cluster node
-  command: mysqld_bootstrap
+  shell: /usr/bin/mysqld_bootstrap
+  args:
+    executable: /bin/bash
   when: inventory_hostname == groups['galera_cluster'][0]
 
 - name: Restart the other MySQL Galera cluster nodes
