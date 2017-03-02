@@ -1,0 +1,3 @@
+
+- src: https://github.com/darkedges/ansible-commonos
+  name: darkedges.commonos

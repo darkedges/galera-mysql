@@ -1,0 +1,24 @@
+---
+
+- debug: msg="Installing Galera repo"
+
+- shell: uname -m
+  register: uname_result
+
+- name: set facts
+  set_fact:
+    os_architecture: "{{ uname_result.stdout }}"
+
+- name: Add Galera repo
+  template: src="etc/yum.respos.d/galera.repo.j2"
+            dest=/etc/yum.repos.d/galera.repo
+            owner=root 
+            group=root mode=0644
+
+- name: add RPM Key for Galera 
+  rpm_key: state=present
+           key=http://releases.galeracluster.com/GPG-KEY-galeracluster.com
+
+- name: Add EPEL repo
+  yum: name=epel-release 
+       state=present

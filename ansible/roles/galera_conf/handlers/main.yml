@@ -1,0 +1,5 @@
+---
+- name: Restart MySQL Galera cluster
+  service: name=mysql 
+           state=restarted
+  when: bootstrapped

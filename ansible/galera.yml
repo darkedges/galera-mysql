@@ -1,0 +1,12 @@
+---
+
+- hosts: galera_cluster
+  gather_facts: yes
+  become: yes
+  roles:
+    - { role: darkedges.commonos, tags: [ 'setup' ] }
+    - { role: security, tags: [ 'setup' ] }
+    - { role: galera_repos, tags: [ 'setup', 'packages' ] }
+    - { role: galera_packages, tags: [ 'setup', 'packages' ] }
+    - { role: galera_privs, tags: [ 'auth' ] }
+    - { role: galera_conf, tags: [ 'config' ] }

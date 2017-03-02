@@ -1,0 +1,6 @@
+---
+
+galera_sst_user: galera
+galera_sst_pass: P@ssw0rd
+galera_mysql_user: root
+galera_mysql_password: P@ssw0rd

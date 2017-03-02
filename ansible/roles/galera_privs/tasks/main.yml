@@ -1,0 +1,21 @@
+---
+- name: Ensure MySQL is running
+  service: name=mysqld
+           state=started
+
+- name: reset mysql 5.6+ default password (no longer empty)
+  shell: "mysql_secret=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}') && mysql --connect-expired-password -p${mysql_secret} -e 'SET PASSWORD = PASSWORD(\"{{ galera_mysql_password }}\")' && touch ~/.mysqlpassword"
+  args:
+    creates: ~/.mysqlpassword
+
+- name: Add Galera SST user
+  mysql_user: name={{ galera_sst_user }} 
+              host="{{ item }}"
+              check_implicit_admin=yes
+              password={{ galera_sst_pass }} 
+              login_user="{{ galera_mysql_user }}"
+              login_password="{{ galera_mysql_password }}"
+              priv="*.*:ALL" 
+              append_privs=yes
+  with_items:
+    - "localhost"
